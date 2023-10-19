@@ -7,7 +7,8 @@ public class FPCamera : MonoBehaviour
 {
     [SerializeField] Transform player;
     [SerializeField] float sensitivity = 5f;
-    private float cameraVertRotation = 0;
+
+    float xRotation = 0f;
 
     bool lockedCursorState = true;
 
@@ -21,15 +22,14 @@ public class FPCamera : MonoBehaviour
     {
         
         //collect mouse input
-        float inputX = Input.GetAxis("Mouse X") * sensitivity;
-        float inputY = Input.GetAxis("Mouse Y") * sensitivity;
+        float inputX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        float inputY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        //
 
-        //X Axis
-        cameraVertRotation -= inputY;
-        cameraVertRotation = Mathf.Clamp(cameraVertRotation, -90, 90);
-        transform.localEulerAngles = Vector3.right * cameraVertRotation;
+        xRotation -= inputY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        //Y Axis
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.Rotate(Vector3.up * inputX);
 
     }
