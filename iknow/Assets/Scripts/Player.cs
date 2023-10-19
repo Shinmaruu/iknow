@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private float xMove;
-    private float yMove;
+    [SerializeField] CharacterController characterController;
+    [SerializeField] float speed = 5.0f;
+
+
+    private float gravity = -9.81f;
+    private Vector3 playerMove;
+     
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        characterController = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        xMove = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
-        yMove = Input.GetAxisRaw("Vertical") * Time.deltaTime;
-        transform.Rotate(0, xMove, 0);
-        transform.Rotate(yMove , 0, 0);
+        playerMove = new Vector3 (Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        characterController.Move(playerMove * speed * Time.deltaTime);
     }
+
 }
