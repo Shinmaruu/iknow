@@ -8,10 +8,19 @@ public class StoryInteract: Interactable
     [SerializeField] StoryManager storyManager;
     [SerializeField] private string infoMessage;
     private bool hasInteracted = false;
+    [SerializeField] AudioClip interactNoise;
+    [SerializeField] AudioClip ambientNoise;
+
+    AudioManager audioManager;
+
+    void Awake()
+    {
+        //audioManager = gameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     void Start()
     {
-
+        
     }
 
     void Update()

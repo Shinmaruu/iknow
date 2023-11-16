@@ -8,6 +8,15 @@ public class LockedDoor : Interactable
     [SerializeField] StoryManager storyManager;
     [SerializeField] string baseMessage;
     private bool doorOpen;
+
+
+    AudioManager audioManager;
+
+    void Awake()
+    {
+        //audioManager = gameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +37,14 @@ public class LockedDoor : Interactable
     {
         if (storyManager.flagsTriggered == 3)
         {
+            //audioManager.PlaySFX(audioManager.doorOpen);
             doorOpen = !doorOpen;
             door.GetComponent<Animator>().SetBool("IsOpen", doorOpen);
             promptMessage = string.Empty;
         }
         else
         {
+            //audioManager.PlaySFX(audioManager.doorInteract);
             promptMessage = "Hmm... the door is locked, I should search the surroundings";
         }
     }
